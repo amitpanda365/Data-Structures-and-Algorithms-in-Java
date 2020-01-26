@@ -1,5 +1,6 @@
 package singly;
 
+
 public class SinglyLinkedList {
 
 	Node first;
@@ -167,8 +168,18 @@ public class SinglyLinkedList {
 	public boolean insertInSortedList(int ele) {
 		Node n = new Node(ele);
 		Node p = first;
-		Node q = null;
-		while (p.ele > ele) {
+		Node q = count == 1 ? p : null;
+
+		if (first == null) {
+			first = n;
+			return true;
+		}
+		if (p.ele > ele) {
+			first = n;
+			first.next = p;
+			return true;
+		}
+		while (p != null && p.ele < ele) {
 			q = p;
 			p = p.next;
 		}
