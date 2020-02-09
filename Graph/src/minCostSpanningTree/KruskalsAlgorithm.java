@@ -51,7 +51,7 @@ public class KruskalsAlgorithm {
 
 			if ((find(x) != find(y)) || (find(x) == -1 && find(y) == -1)) {
 
-				union(x, y);
+				union(find(x), find(y));
 				minCostTree[0][i] = x;
 				minCostTree[1][i] = y;
 				i++;
@@ -68,7 +68,7 @@ public class KruskalsAlgorithm {
 	}
 
 	private static void union(int x, int y) {
-		if (find(x) < find(y)) {
+		if (x < y) {
 			set[x] = set[x] + set[y];
 			set[y] = x;
 		} else {
