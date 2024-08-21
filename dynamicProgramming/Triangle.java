@@ -58,4 +58,25 @@ class Triangle {
         }
         return dp[0][0];
     }
+
+   public int spaceOptimization(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        int m=triangle.get(n-1).size();
+        int dp[]=new int[n];
+        int temp[]=new int[n];
+        for (int j = 0; j < n; j++) {
+            dp[j] = triangle.get(n-1).get(j);
+        }
+        temp = dp.clone();
+        for(int i=n-2; i>=0; i--){
+            for(int j=i; j>=0; j--){
+                int x = triangle.get(i).get(j);
+                int down = x + temp[j];
+                int downRight = x + temp[j+1];
+                dp[j] = Math.min(down, downRight);
+            }
+            temp = dp.clone();
+        }
+        return dp[0];
+    }
 }
