@@ -38,4 +38,24 @@ class Triangle {
         int downRight = triangle.get(i).get(j) + min(i+1, j+1, triangle, n, dp);
         return dp[i][j] = Math.min(down, downRight);
     }
+
+   public int tabulation(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        int m=triangle.get(n-1).size();
+        int dp[][]=new int[n][m];
+        for(int i=n-1; i>=0; i--){
+            for(int j=--m; j>=0; j--){
+                if(i==n-1){
+                    dp[i][j] = triangle.get(i).get(j);
+                }
+                else{
+                    int x = triangle.get(i).get(j);
+                    int down = x + dp[i+1][j];
+                    int downRight = x + dp[i+1][j+1];
+                    dp[i][j] = Math.min(down, downRight);
+                }
+            }
+        }
+        return dp[0][0];
+    }
 }
