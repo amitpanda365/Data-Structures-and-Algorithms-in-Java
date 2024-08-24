@@ -22,13 +22,15 @@ public class SubsetSumToK {
     static boolean subUtil(int n, int k, int arr[], int[][] dp){
         if(k == 0)
             return true;
-        if(k<0 || n == -1)
-            return false;
+        if(n == 0)
+            return arr[0] == k;
         if(dp[n][k] != -1)
             return dp[n][k] == 1;
             
         boolean notTake = subUtil(n-1, k, arr, dp);
-        boolean take = subUtil(n-1, k-arr[n], arr, dp);
+        boolean take = false;
+        if(arr[n] <= k)
+            take = subUtil(n-1, k-arr[n], arr, dp);
 
         dp[n][k] = (notTake || take) ? 1 : 0;
     
