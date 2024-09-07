@@ -42,6 +42,22 @@ class LCS {
         return dp[l1-1][l2-1];
     }
 
+    int tabulationUtil2(String s1, String s2){
+        int l1 = s1.length() + 1;
+        int l2 = s2.length() + 1;
+        int[][] dp = new int[l1][l2];
+
+        for(int ind1 = 1; ind1<l1; ind1++){
+            for(int ind2 = 1; ind2<l2; ind2++){
+                if(s1.charAt(ind1-1) == s2.charAt(ind2-1))
+                    dp[ind1][ind2] = 1 + dp[ind1-1][ind2-1];
+                else
+                    dp[ind1][ind2] = Math.max(dp[ind1-1][ind2], dp[ind1][ind2-1]);
+            }
+        }
+        return dp[l1-1][l2-1];
+    }
+
     // Recursion + Memoization
     int util(int ind1, int ind2, String s1, String s2, int[][] dp){
 
